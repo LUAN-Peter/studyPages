@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Execution Context | Chaoxiang&#39;s Study Notes</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/studyPages/assets/css/0.styles.d1a6705c.css" as="style"><link rel="preload" href="/studyPages/assets/js/app.b38cab34.js" as="script"><link rel="preload" href="/studyPages/assets/js/2.1626cb31.js" as="script"><link rel="preload" href="/studyPages/assets/js/14.c87a4647.js" as="script"><link rel="prefetch" href="/studyPages/assets/js/10.35ace908.js"><link rel="prefetch" href="/studyPages/assets/js/11.087a96f6.js"><link rel="prefetch" href="/studyPages/assets/js/12.f0e6442a.js"><link rel="prefetch" href="/studyPages/assets/js/13.5e386017.js"><link rel="prefetch" href="/studyPages/assets/js/15.02e1028a.js"><link rel="prefetch" href="/studyPages/assets/js/16.27d3c376.js"><link rel="prefetch" href="/studyPages/assets/js/17.ca0774d0.js"><link rel="prefetch" href="/studyPages/assets/js/18.915810d3.js"><link rel="prefetch" href="/studyPages/assets/js/19.b1da4c38.js"><link rel="prefetch" href="/studyPages/assets/js/20.018fba21.js"><link rel="prefetch" href="/studyPages/assets/js/21.64dab9d9.js"><link rel="prefetch" href="/studyPages/assets/js/22.6775df76.js"><link rel="prefetch" href="/studyPages/assets/js/23.f3593274.js"><link rel="prefetch" href="/studyPages/assets/js/24.3a7e16bd.js"><link rel="prefetch" href="/studyPages/assets/js/25.13485e0a.js"><link rel="prefetch" href="/studyPages/assets/js/26.d0f87dff.js"><link rel="prefetch" href="/studyPages/assets/js/27.56c84efb.js"><link rel="prefetch" href="/studyPages/assets/js/28.c6af8a09.js"><link rel="prefetch" href="/studyPages/assets/js/29.b4036b19.js"><link rel="prefetch" href="/studyPages/assets/js/3.73690c6a.js"><link rel="prefetch" href="/studyPages/assets/js/30.825317f9.js"><link rel="prefetch" href="/studyPages/assets/js/31.ed696c4b.js"><link rel="prefetch" href="/studyPages/assets/js/32.9913bcdf.js"><link rel="prefetch" href="/studyPages/assets/js/4.0bf5fde3.js"><link rel="prefetch" href="/studyPages/assets/js/5.f2c33806.js"><link rel="prefetch" href="/studyPages/assets/js/6.83bf3420.js"><link rel="prefetch" href="/studyPages/assets/js/7.826098d5.js"><link rel="prefetch" href="/studyPages/assets/js/8.c864b340.js"><link rel="prefetch" href="/studyPages/assets/js/9.3b04fc4a.js">
+    <link rel="stylesheet" href="/studyPages/assets/css/0.styles.d1a6705c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/studyPages/" class="home-link router-link-active"><!----> <span class="site-name">Chaoxiang's Study Notes</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/studyPages/" class="nav-link">
+  HOME
+</a></div><div class="nav-item"><a href="/studyPages/algorithm/" class="nav-link">
+  ALGORITHM
+</a></div><div class="nav-item"><a href="/studyPages/javascript/" class="nav-link router-link-active">
+  JAVASCRIPT
+</a></div><div class="nav-item"><a href="/studyPages/article/" class="nav-link">
+  ARTICLE
+</a></div><div class="nav-item"><a href="https://github.com/LUAN-Peter" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GITHUB
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/studyPages/" class="nav-link">
+  HOME
+</a></div><div class="nav-item"><a href="/studyPages/algorithm/" class="nav-link">
+  ALGORITHM
+</a></div><div class="nav-item"><a href="/studyPages/javascript/" class="nav-link router-link-active">
+  JAVASCRIPT
+</a></div><div class="nav-item"><a href="/studyPages/article/" class="nav-link">
+  ARTICLE
+</a></div><div class="nav-item"><a href="https://github.com/LUAN-Peter" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GITHUB
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/studyPages/javascript/" aria-current="page" class="sidebar-link">JavaScript</a></li><li><a href="/studyPages/javascript/dataType.html" class="sidebar-link">Data Types</a></li><li><a href="/studyPages/javascript/object.html" class="sidebar-link">Object</a></li><li><a href="/studyPages/javascript/prototype.html" class="sidebar-link">Prototype Chain</a></li><li><a href="/studyPages/javascript/inheritance.html" class="sidebar-link">JavaScript Inheritance</a></li><li><a href="/studyPages/javascript/context.html" aria-current="page" class="active sidebar-link">Execution Context</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/studyPages/javascript/context.html#types-of-ec" class="sidebar-link">Types of EC</a></li><li class="sidebar-sub-header"><a href="/studyPages/javascript/context.html#vo-and-ao" class="sidebar-link">VO and AO</a></li><li class="sidebar-sub-header"><a href="/studyPages/javascript/context.html#compile-stage" class="sidebar-link">Compile Stage</a></li></ul></li><li><a href="/studyPages/javascript/jsmemory.html" class="sidebar-link">Memory Mangement</a></li><li><a href="/studyPages/javascript/eventExec.html" class="sidebar-link">Events Execution</a></li><li><a href="/studyPages/javascript/processThread.html" class="sidebar-link">Process Thread</a></li><li><a href="/studyPages/javascript/eventPropagation.html" class="sidebar-link">Event Propagation</a></li><li><a href="/studyPages/javascript/debounce.html" class="sidebar-link">Debounce</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="execution-context">Execution Context</h1> <blockquote><p>Execution Context, abbreviated form EC, is an abstract concept used by <code>ECMA-262</code> specification for <strong>typitication</strong> and <strong>differenciation</strong> of an execution code.</p></blockquote> <blockquote><p>In layman's term, Execution Context roughly equates to the <code>environment</code> that the JavaScript code is executing in.</p></blockquote> <p>The standard doesn't define the accurate structure of EC. Logically, set of EC form a <code>stack</code>. The bottom of the <code>stack</code> is <code>global execution context</code>. The top is the <code>active execution context</code>. The stack would be modified by push or pop during entering or exiting various kinds of EC.</p> <h2 id="types-of-ec">Types of EC</h2> <p>There are 3 types of EC: <em>Global</em>, <em>Function</em> and <em>Eval</em>.</p> <p>To make things clear, we could define the stack of execution context as an array:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Pseudo-code</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><p>A new EC would be pushed into the stack every time one entering a function, even if the function is called <strong>recurssively</strong> or as <strong>constructor</strong>. Also the <code>eval</code> function can also trigger a push-in under unusual circumstances.</p> <h3 id="global">Global</h3> <p>The EC generated at <code>Program</code> level. For example, load extenal <code>.js</code> files or run code inside the <code>&lt;script&gt;&lt;/script&gt;</code>. So it looks like an initialization:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Pseudo-code</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="function">Function</h3> <p>The stack would be pushed into a new elements when entering a new function showed as following:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">tag</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>tag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">foo</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">foo</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>The ECStack would be modified:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Pseudo-code</span>
+
+<span class="token comment">// First activation</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext<span class="token punctuation">,</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Recurssively activation</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext<span class="token punctuation">,</span> <span class="token comment">// Recurssively</span>
+    <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext<span class="token punctuation">,</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><p>Besides, every <code>return</code> of a function would exit the current execution context, and ECStack would do the pop behavior accordingly. After all this code finished, ECStack would contain <code>GlobalContext</code> only. So if there is a endless recurssive function, the function's execution context will be pushed into ECStack unceasingly until exceeding the <code>Maximum call stack size</code>. That's the reason why <strong>Stack Overflow</strong>.</p> <h3 id="eval">Eval</h3> <p>There are something different when calling a <code>eval</code> function. In this case, there is a new concept of <code>calling context</code>.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">eval</span><span class="token punctuation">(</span><span class="token string">'var x = 1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">eval</span><span class="token punctuation">(</span><span class="token string">'var y = 2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &quot;y&quot; is not defined</span>
+</code></pre></div><p>The ECStack would be modified like following:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Pseudo-code</span>
+
+<span class="token comment">// Initialization</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// eval('var x = 1');</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        context<span class="token operator">:</span> evalContext<span class="token punctuation">,</span>
+        callingContext<span class="token operator">:</span> GlobalContext
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// exit eval('var x = 1');</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// call foo()</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext<span class="token punctuation">,</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// eval('var y = 2');</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        context<span class="token operator">:</span> evalContext<span class="token punctuation">,</span>
+        callingContext<span class="token operator">:</span> <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext<span class="token punctuation">,</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// exit eval('var y = 2');</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token operator">&lt;</span>foo<span class="token operator">&gt;</span> FunctionContext<span class="token punctuation">,</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// foo() return</span>
+ExecutionContextStack <span class="token operator">=</span> <span class="token punctuation">[</span>
+    GlobalContext
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">ALWAYS avoid using eval()</p> <p><code>eval()</code> is a dangerous function because it executes the code with the privileges of the caller! It could be affected by a malicious party.<br> <code>eval</code> is slower than the alternatives because it has to invode the JavaScript interpreter. While others are optimized by modern JS engines. Modern JS engines convert javascript to machine code.<br>
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!" target="_blank" rel="noopener noreferrer">window.Function()<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> can replace <code>eval()</code>.</p></div> <h1 id="ec-lifecycle">EC Lifecycle</h1> <p>Generally, we divide the EC life cycle into 3 parts: Creating, Execution and Termination.</p> <h2 id="vo-and-ao">VO and AO</h2> <p>We had better learn about what is VO(<strong>V</strong>ariable <strong>O</strong>bject) and AO(<strong>A</strong>ctivation <strong>O</strong>bject) to help us comprehend the lifecycle better.<br> <strong>VO</strong> is an object storing the <strong>identifiers</strong> can be visited in EC, including:</p> <ul><li>arguments object</li> <li>Key-Value of Arguments and parameters</li> <li>Function declaration</li> <li>Variable declaration</li> <li>this</li></ul> <p><strong>AO</strong> is an object generated from VO. Once creating a new EC or entering a function, <strong>AO</strong> would be created with all elements come from VO.</p> <div class="custom-block warning"><p class="custom-block-title">VO and AO are both spec</p> <p>The concepts of VO and AO exist in the specification only. According to specification, we cannot visit the data from <strong>VO</strong> because of JavaScript engine. We can only visit data from <strong>AO</strong> once we enter a function. It looks like something has be triggered. That's why we call it <strong>activation object</strong>.<br>
+We seldom use both after ES5! We should learn <a href="../.vuepress/public/assets/img/whyHoist.png">Lexical &amp; Variable Environment</a> more.</p></div> <h2 id="compile-stage">Compile Stage</h2> <p>Compile Stage - creating stage will do the following work:</p> <ul><li>Create <strong>Scope Chain</strong></li> <li>Create AO from VO:
+<ul><li>Create arguments object</li> <li>Create Key-Value of arguments and parameters</li> <li>Create function declaration</li> <li>Create variable declaration</li></ul></li> <li>Create this</li></ul> <p>There is something interesting here:</p> <ol><li>Variable and Function <strong>hoisting</strong>.</li> <li><a href="../.vuepress/public/assets/img/whyHoist.png">Lexical environment and Variable environment</a>;</li></ol> <p>To learn more about hoisting, we should recognize that JavaScript will do <code>compiling</code> before executing. When JavaScript do the compiling, it will hoist the <strong>function</strong> or <strong>variable</strong> with <code>var</code> keyword.</p> <p>Look over <strong>variable</strong> hoisting firistly:</p> <div class="language-js extra-class"><pre class="language-js"><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Uncaught ReferenceError: b is not defined</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
+</code></pre></div><p>The <code>var</code> will hoist the declaration the identifier to the front-most of the code but <code>let</code> not.</p> <hr> <p>Then we look over <strong>function</strong> hoisting:</p> <div class="language-js extra-class"><pre class="language-js"><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [Function: foo1]</span>
+<span class="token function">foo1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+<span class="token function">foo2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Uncaught TypeError: foo2 is not a function</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Uncaught TypeError: foo3 is not a function</span>
+<span class="token function">foo3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Uncaught TypeError: foo3 is not a function</span>
+
+<span class="token keyword">function</span> <span class="token function">foo1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> <span class="token function-variable function">foo2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> <span class="token function-variable function">foo3</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>JavaScript engine scans the whole code before executing. When it find the <code>function</code> declaration, it will hoist it. As for <code>foo2</code>, the JS engine would regard it as a variable. So it would only hoist it with initial value <code>undefined</code>.</p> <p>The reason why we need hoisting is very interesting. It's easy to comprehend why we need hoisting in <code>function</code> - if we want to invoke a function, we must create it before. And this feature would not cause too many problems. However, hoisting a <code>variable</code> is really a bad idea. It would pollute global object and confuse programmer. Maybe we can glimpse the attitude according to Branden's twitter:<br> <img src="/studyPages/assets/img/whyHoist.340ec35d.png" alt="Image"></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/21/2021, 12:24:41 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/studyPages/javascript/inheritance.html" class="prev">
+        JavaScript Inheritance
+      </a></span> <span class="next"><a href="/studyPages/javascript/jsmemory.html">
+        Memory Mangement
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/studyPages/assets/js/app.b38cab34.js" defer></script><script src="/studyPages/assets/js/2.1626cb31.js" defer></script><script src="/studyPages/assets/js/14.c87a4647.js" defer></script>
+  </body>
+</html>
